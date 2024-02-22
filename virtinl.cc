@@ -2,58 +2,64 @@
 #include <random>
 #include <vector>
 
+#ifndef NOBMK
 #include "benchmark/cppbenchmark.h"
+#endif
 
 constexpr int NCALL = 100;
 constexpr int NBMK = 10000;
 
+int g;
+int f(int);
+
 struct NonVirt {
-  int foo(int x);
-  int bar(int x);
+  int foo(int x) {
+    g += f(x);
+    return (x > 0) ? bar(x - 1) : 0;
+  }
+
+  int bar(int x) {
+    g += f(x);
+    return (x > 0) ? foo(x - 1) : 0;
+  }
 };
 
 struct VirtBase {
-  virtual int foo(int x);
-  virtual int bar(int x);
+  virtual int foo(int x) {
+    g += f(x);
+    return (x > 0) ? bar(x - 1) : 0;
+  }
+
+  virtual int bar(int x) {
+    g += f(x);
+    return (x > 0) ? foo(x - 1) : 0;
+  }
 };
 
 struct VirtDerived : VirtBase {
-  int foo(int x) override;
-  int bar(int x) override;
+  int foo(int x) override {
+    g += f(x);
+    return (x > 0) ? bar(x - 1) : 0;
+  }
+
+  int bar(int x) override {
+    g += f(x);
+    return (x > 0) ? foo(x - 1) : 0;
+  }
 };
 
-void startup(NonVirt *nv) {
-  for (int i = 0; i < NBMK; ++i)
+void __attribute__((noinline)) startup(NonVirt *nv) {
+  for (int i = 0; i < NBMK; ++i) {
+    g = f(g);
     nv->bar(NCALL);
+  }
 }
 
-void startup(VirtBase *vb) {
-  for (int i = 0; i < NBMK; ++i)
+void __attribute__((noinline)) startup(VirtBase *vb) {
+  for (int i = 0; i < NBMK; ++i) {
+    g = f(g);
     vb->bar(NCALL);
-}
-
-int NonVirt::foo(int x) {
-  return (x > 0) ? bar(x - 1) : 0;
-}
-
-int VirtBase::foo(int x) {
-  return (x > 0) ? bar(x - 1) : 0;
-};
-
-int VirtDerived::foo(int x) {
-  return (x > 0) ? bar(x - 1) : 0;
-}
-
-int NonVirt::bar(int x) {
-  return (x > 0) ? foo(x - 1) : 0;
-}
-
-int VirtBase::bar(int x) {
-  return (x > 0) ? foo(x - 1) : 0;
-};
-
-int VirtDerived::bar(int x) {
-  return (x > 0) ? foo(x - 1) : 0;
+  }
 }
 
 #ifndef NOBMK

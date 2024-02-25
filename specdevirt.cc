@@ -9,26 +9,9 @@
 constexpr int NCALL = 100;
 constexpr int NBMK = 10000;
 
-int f(int);
-
-struct NonVirt {
-  int foo(int x) {
-    return f(x);
-  }
-
-  int bar(int x) {
-    return foo(x);
-  }
-};
-
 struct VirtBase {
-  virtual int foo(int x) {
-    return f(x);
-  }
-
-  virtual int bar(int x) {
-    return foo(x);
-  }
+  virtual int foo(int x) = 0;
+  virtual int bar(int x) = 0;
 };
 
 struct VirtDerived : VirtBase {

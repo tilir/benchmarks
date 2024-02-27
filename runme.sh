@@ -1,4 +1,8 @@
-clang++ -O2 partition.cc extswap.cc -L${CppBenchmark}/bin -L${CppBenchmark}/build/modules -lcppbenchmark -lHdrHistogram -lcpp-optparse
-clang++ -O2 partition.cc extswap.cc -I${CppBenchmark}/include -L${CppBenchmark}/bin -L${CppBenchmark}/temp/modules -lcppbenchmark -lHdrHistogram -lcpp-optparse
-clang++ -O2 virtual-1.cc virtual-2.cc -I${CppBenchmark}/include -L${CppBenchmark}/bin -L${CppBenchmark}/temp/modules -lcppbenchmark -lHdrHistogram -lcpp-optparse
+#!/bin/bash
+
+export CppBenchmark=/mnt/c/research/CppBenchmark/
+export OPTIONS="-I${CppBenchmark}/include -L${CppBenchmark}/bin -L${CppBenchmark}/build/modules -L${CppBenchmark}/temp/modules"
+export LIBS="-lcppbenchmark -lHdrHistogram -lcpp-optparse"
+
+clang++ -O2 ./inline/partition.cc ./inline/extswap.cc ${OPTIONS} ${LIBS}
 ./a.out -q -o csv | tee partition.csv

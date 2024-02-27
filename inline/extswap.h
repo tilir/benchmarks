@@ -1,13 +1,9 @@
 //-----------------------------------------------------------------------------
 //
-// Partition benchmark with external swap, module 2
+// Partition benchmark with external swap, header
 //
 //-----------------------------------------------------------------------------
 
-#include "extswap.h"
+#pragma once
 
-void ext_swap(int *a, int *b) {
-  int t = *a;
-  *a = *b;
-  *b = t;
-}
+void ext_swap(int *a, int *b);

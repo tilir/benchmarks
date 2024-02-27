@@ -1,8 +1,6 @@
 //-----------------------------------------------------------------------------
 //
-// Exeptions vs ret codes benchmark part 2
-//
-// see exc_ret_1.cc for part 1
+// Exeptions vs ret codes benchmark, module 1
 //
 //-----------------------------------------------------------------------------
 
@@ -15,11 +13,11 @@
 
 int call_outer_exc(int x) {
   if (x <= 0)
-    call_inner_exc(x);
+    return call_inner_exc(x);
   return call_exc(x - 1) + 1;
 }
 
-int call_outer_retc(int x) {
+int call_outer_retc(int x) noexcept {
   int n;
   if (x <= 0)
     n = call_inner_retc(x);
@@ -43,7 +41,7 @@ int startup_exc() {
   return sum;
 }
 
-int startup_retc() {
+int startup_retc() noexcept {
   int sum = 0;
   int nerrs = 0;
   for (int i = 0; i < NBMK; ++i) {

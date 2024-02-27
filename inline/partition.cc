@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
 //
-// Partition benchmark, part 1
+// Partition benchmark with external swap, module 1
 //
 //-----------------------------------------------------------------------------
 
@@ -10,13 +10,13 @@
 #include <random>
 #include <vector>
 
+#include "extswap.h"
+
 constexpr int MAX = 10000;
 constexpr int NPTS = 10000;
 
 std::random_device rd;
 std::mt19937 gen(rd());
-
-void ext_swap(int *a, int *b);
 
 unsigned partition_extswap(int *arr, unsigned low, unsigned high) {
   int pivot, i, j;
@@ -53,19 +53,18 @@ protected:
   std::vector<int> v;
 
   TestFixture() {
+    v.reserve(NPTS);
     std::uniform_int_distribution<> distrib(0, MAX);
     for (int i = 0; i < NPTS; ++i)
       v.push_back(distrib(gen));
   }
 };
 
-BENCHMARK_FIXTURE(TestFixture, "extswap")
-{
+BENCHMARK_FIXTURE(TestFixture, "extswap") {
   partition_extswap(&v[0], 0, v.size() - 1);
 }
 
-BENCHMARK_FIXTURE(TestFixture, "intswap")
-{
+BENCHMARK_FIXTURE(TestFixture, "intswap") {
   partition_iterswap(&v[0], 0, v.size() - 1);
 }
 

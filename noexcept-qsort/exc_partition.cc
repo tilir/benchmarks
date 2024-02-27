@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
 //
-// Noexcept qsort predicate benchmark
+// Noexcept partition predicate benchmark
 //
 //-----------------------------------------------------------------------------
 
@@ -23,14 +23,16 @@ protected:
   }
 };
 
-BENCHMARK_FIXTURE(ContainerFixture, "excqsort") {
-  auto excpred = [](int x, int y) { return x < y; };
-  std::sort(container.begin(), container.end(), excpred);
+BENCHMARK_FIXTURE(ContainerFixture, "excpart") {
+  auto pivot = container[0];
+  auto excpred = [pivot](int x) { return x < pivot; };
+  std::partition(container.begin(), container.end(), excpred);
 }
 
-BENCHMARK_FIXTURE(ContainerFixture, "nexcqsort") {
-  auto nexcpred = [] (int x, int y) noexcept { return x < y; };
-  std::sort(container.begin(), container.end(), nexcpred);
+BENCHMARK_FIXTURE(ContainerFixture, "nexcpart") {
+  auto pivot = container[0];
+  auto nexcpred = [pivot] (int x) noexcept { return x < pivot; };
+  std::partition(container.begin(), container.end(), nexcpred);
 }
 
 BENCHMARK_MAIN()

@@ -26,10 +26,9 @@ struct VirtDerived : public B, public C {
   int foo(int x) override { return f(x) + 1; };
 };
 
-struct Derived : VirtBase {
-  int foo(int x) override {
-    return f(x);
-  }
+struct Base { virtual int foo(int x) { return f(x); } };
+struct Derived : Base {
+  int foo(int x) override { return f(x) + 1; }
 };
 
 int __attribute__((noinline)) startup(VirtBase *vb) {

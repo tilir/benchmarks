@@ -1,8 +1,12 @@
 //-----------------------------------------------------------------------------
 //
-// Exeptions vs ret codes benchmark part 1
+// Exeptions vs ret codes benchmark, module 1
 //
-// see exc_ret_2.cc for part 2
+// exception vs error codes:
+// clang++ -O2 exc_ret_1.cc exc_ret_2.cc ${OPTIONS}
+//
+// no exception vs no error codes
+// clang++ -O2 -DNOEXC exc_ret_1.cc exc_ret_2.cc ${OPTIONS}
 //
 //-----------------------------------------------------------------------------
 
@@ -22,18 +26,26 @@ int call_exc(int x) {
 }
 
 int call_inner_exc(int x) {
+#ifndef NOEXC
   throw std::runtime_error("something");
+#else
+  return 0;
+#endif
 }
 
-int call_retc(int x) {
+int call_retc(int x) noexcept {
   int n = call_outer_retc(x - 1);
   if (n == -1)
     return -1;
   return n + 1;
 }
 
-int call_inner_retc(int x) {
+int call_inner_retc(int x) noexcept {
+#ifndef NOEXC
   return -1;
+#else
+  return 0;
+#endif
 }
 
 #ifndef NOBMK

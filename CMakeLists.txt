@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.11)
 project("benchmarks")
 
 enable_testing()
-file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/CSVS)
+set(CSVS ${CMAKE_BINARY_DIR}/CSVS)
+file(MAKE_DIRECTORY ${CSVS})
 
 find_package(cppbenchmark REQUIRED)
 

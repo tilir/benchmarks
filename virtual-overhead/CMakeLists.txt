@@ -1,0 +1,22 @@
+SET(TNAME virtual)
+
+add_executable(${TNAME} virtual-1.cc virtual-2.cc)
+target_compile_features(${TNAME} PRIVATE cxx_std_20)
+target_link_libraries(${TNAME} cppbenchmark::cppbenchmark)
+
+add_test(
+  NAME TEST_${TNAME}
+  COMMAND ${TNAME} -q -o csv > ${CMAKE_BINARY_DIR}/CSVS/${TNAME}.csv)
+set_tests_properties(${TEST_TARGET} PROPERTIES DEPENDS ${TNAME})
+
+SET(TNAME virtual-shuffle)
+
+add_executable(${TNAME} virtual-shuffle-1.cc virtual-shuffle-2.cc)
+target_compile_features(${TNAME} PRIVATE cxx_std_20)
+target_link_libraries(${TNAME} cppbenchmark::cppbenchmark)
+
+add_test(
+  NAME TEST_${TNAME}
+  COMMAND ${TNAME} -q -o csv > ${CMAKE_BINARY_DIR}/CSVS/${TNAME}.csv)
+set_tests_properties(${TEST_TARGET} PROPERTIES DEPENDS ${TNAME})
+

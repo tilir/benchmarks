@@ -1,0 +1,7 @@
+[requires]
+cppbenchmark/cci.20201029
+[generators]
+CMakeDeps
+CMakeToolchain
+[layout]
+cmake_layout

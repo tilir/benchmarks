@@ -1,3 +1,3 @@
 name,avg_time,min_time,max_time,total_time,total_operations,total_items,total_bytes,operations_per_second,items_per_second,bytes_per_second
-"exception",1718552,1718552,1843862,4947712230,2879,0,0,581,0,0
-"retcodes",64648,63599,67625,4515634679,69849,0,0,15468,0,0
+"extswap",9223,4846620100,4878370700,4846620100,525449,0,0,108415,0,0
+"intswap",5078,4749064400,4936857600,4749064400,935162,0,0,196914,0,0

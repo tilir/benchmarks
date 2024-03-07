@@ -1,3 +1,0 @@
-name,avg_time,min_time,max_time,total_time,total_operations,total_items,total_bytes,operations_per_second,items_per_second,bytes_per_second
-"sumfib_coro",276198,269915,276198,4747023091,17187,0,0,3620,0,0
-"sumfib",265100,264982,268175,4860350145,18334,0,0,3772,0,0

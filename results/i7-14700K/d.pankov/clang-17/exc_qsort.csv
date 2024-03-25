@@ -1,0 +1,3 @@
+name,avg_time,min_time,max_time,total_time,total_operations,total_items,total_bytes,operations_per_second,items_per_second,bytes_per_second
+"excqsort",4108,4086,4192,4994600068,1215774,0,0,243417,0,0
+"nexcqsort",3779,3771,3825,4945350821,1308351,0,0,264561,0,0

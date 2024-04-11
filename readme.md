@@ -42,3 +42,16 @@ This will take some time, be patient. Benchmarking results will be created in th
 
 You are welcome to create MR in results folder with your architecture and name it will help my talk!
 
+
+
+## Troubleshooting
+
+### error: 'uint64_t' does not name a type during `conan install` phase
+```bash
+cppbench_version=$(grep -a cppbenchmark conanfile.txt)
+cppbench_path=$(conan cache path $cppbench_version)
+cppbench_header_path=$cppbench_path/../s/src/include/benchmark/system.h
+sed -i 's/<string>/<string>\n#include <cstdint>/' $cppbench_header_path
+```
+
+Note: normally it is highly discouraged to modify sources inside conan cache, this is just a temporary workaround

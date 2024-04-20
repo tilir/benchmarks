@@ -1,0 +1,3 @@
+name,avg_time,min_time,max_time,total_time,total_operations,total_items,total_bytes,operations_per_second,items_per_second,bytes_per_second
+"excpart",2158,4959925400,7036093200,4959925400,2297670,0,0,463246,0,0
+"nexcpart",2162,4573736000,6426603200,4573736000,2115020,0,0,462427,0,0

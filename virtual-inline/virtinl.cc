@@ -14,6 +14,12 @@
 #include "benchmark/cppbenchmark.h"
 #endif
 
+#if defined(_WIN32) || defined(_WIN64)
+#define NOINLINE __declspec(noinline)
+#else
+#define NOINLINE __attribute__((noinline))
+#endif
+
 constexpr int NCALL = 100;
 constexpr int NBMK = 10000;
 
@@ -49,14 +55,14 @@ struct VirtDerived : VirtBase {
   }
 };
 
-int __attribute__((noinline)) startup(NonVirt *nv) {
+NOINLINE int startup(NonVirt *nv) {
   int sum = 0;
   for (int i = 0; i < NBMK; ++i)
     sum += nv->bar(NCALL);
   return sum;
 }
 
-int __attribute__((noinline)) startup(VirtBase *vb) {
+NOINLINE int startup(VirtBase *vb) {
   int sum = 0;
   for (int i = 0; i < NBMK; ++i)
     sum += vb->bar(NCALL);

@@ -1,0 +1,3 @@
+name,avg_time,min_time,max_time,total_time,total_operations,total_items,total_bytes,operations_per_second,items_per_second,bytes_per_second
+"nvirtualcall",894928,4996387700,5003726300,4996387700,5583,0,0,1117,0,0
+"virtualcall",894357,4994094500,5004516700,4994094500,5584,0,0,1118,0,0

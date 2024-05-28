@@ -1,0 +1,3 @@
+name,avg_time,min_time,max_time,total_time,total_operations,total_items,total_bytes,operations_per_second,items_per_second,bytes_per_second
+"extswap",5570,5201328937,5331668685,5201328937,933697,0,0,179511,0,0
+"intswap",3574,4785588577,4917311753,4785588577,1338916,0,0,279780,0,0

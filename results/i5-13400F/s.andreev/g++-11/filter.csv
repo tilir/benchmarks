@@ -1,0 +1,4 @@
+name,avg_time,min_time,max_time,total_time,total_operations,total_items,total_bytes,operations_per_second,items_per_second,bytes_per_second
+"naive",2103,4985167660,5005836423,4985167660,2369985,0,0,475407,0,0
+"planar",2117,4988211549,5014072546,4988211549,2355755,0,0,472264,0,0
+"modern",2103,4976736190,5049519238,4976736190,2366450,0,0,475502,0,0

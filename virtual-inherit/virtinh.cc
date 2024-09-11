@@ -8,6 +8,7 @@
 
 #include <algorithm>
 #include <random>
+#include <sys/cdefs.h>
 #include <vector>
 
 #ifndef NOBMK
@@ -30,6 +31,13 @@ struct Base { virtual int foo(int x) { return f(x); } };
 struct Derived : Base {
   int foo(int x) override { return f(x) + 1; }
 };
+
+int __attribute__((noinline)) startup(Base *b) {
+  int sum = 0;
+  for (int i = 0; i < NBMK; ++i)
+    sum += b->foo(NCALL);
+  return sum;
+}
 
 int __attribute__((noinline)) startup(VirtBase *vb) {
   int sum = 0;

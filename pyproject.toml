@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "benchmarks"
+version = "0.1.0"
+description = "This project is a Python-based benchmarking tool designed to run various benchmarks, manage the results as CSV files, and handle both error and signal management (like SIGINT). The tool also includes unit tests for validation. To ensure that the environment is consistent and reproducible across different systems, we use Poetry for dependency and environment management."
+authors = ["ViNN280801"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pandas = "^2.2.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

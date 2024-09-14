@@ -1,2 +1,5 @@
 CMakeUserPresets.json
 build
+
+.venv/
+__pycache__/

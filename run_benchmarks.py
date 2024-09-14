@@ -9,12 +9,11 @@ import shutil
 import signal
 import sys
 import time
-import unittest
 from glob import glob
 from multiprocessing import Process
 from os.path import abspath, relpath
 from subprocess import PIPE, STDOUT, Popen
-from unittest import TestLoader, TextTestResult, TextTestRunner
+from unittest import TestCase, TestLoader, TextTestResult, TextTestRunner
 from unittest.mock import patch
 
 import pandas as pd
@@ -238,7 +237,7 @@ class BenchRunnerArgParser:
 
         if args.test:
             print("Running unit tests for BenchRunner...")
-            suite = unittest.TestLoader().loadTestsFromTestCase(BenchRunnerTesting)
+            suite = TestLoader().loadTestsFromTestCase(BenchRunnerTesting)
             runner = CustomTextTestRunner(verbosity=2)
             runner.run(suite)
             return
@@ -308,7 +307,7 @@ class CustomTestResult(TextTestResult):
         self.stream.write("\033[0m")
 
 
-class BenchRunnerTesting(unittest.TestCase):
+class BenchRunnerTesting(TestCase):
 
     @patch("os.path.exists", return_value=True)
     @patch("logging.warning")

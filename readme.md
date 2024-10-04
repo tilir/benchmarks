@@ -13,12 +13,12 @@ git clone https://github.com/tilir/benchmarks.git
 cd benchmarks
 ```
 
-Now create venv and install conan.
+This project uses poetry. Please install poetry according to official installation instructions.
+Next, install dependencies using poetry and activate venv:
 
 ```
-python3 -m venv .venv
-source .venv/bin/activate
-pip3 install conan
+poetry install --no-root
+poetry shell
 ```
 
 Note: if you never had conan earlier on your machine, please also run

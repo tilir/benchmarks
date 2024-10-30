@@ -31,14 +31,29 @@ If you have custom compiler be sure it is inside profile.
 
 Now you are ready for main build and run. Conan will download all dependencies for you.
 
-```
+## Linux build
+
+```bash
 conan install conanfile.txt --build=missing
 cmake -S . -B build/Release --toolchain build/Release/generators/conan_toolchain.cmake  -DCMAKE_BUILD_TYPE=Release
 cmake --build build/Release
 env CTEST_OUTPUT_ON_FAILURE=1 cmake --build build/Release --target test --parallel 1
 ```
 
-This will take some time, be patient. Benchmarking results will be created in the build/Release/CSVS folder. 
+## Windows build
+
+It is highly recommended to use developer powershell
+
+```pwsh
+conan install conanfile.txt --build=missing
+cmake -S . -B .\build --toolchain .\build\generators\conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_DEFAULT_CMP0091=NEW
+cmake --build --preset conan-release
+powershell -command { $env:CTEST_OUTPUT_ON_FAILURE='1'; cmake --build --preset conan-release --target RUN_TESTS --parallel 1 }
+```
+
+---
+
+This will take some time, be patient. Benchmarking results will be created in the build/Release/CSVS folder for Linux and in build/CSVS folder for Windows. 
 
 You are welcome to create MR in results folder with your architecture and name it will help my talk!
 

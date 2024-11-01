@@ -1,3 +1,5 @@
+load("//:variables.bzl", "CSVS")
+
 TNAME = "coro-fibs"
 
 cc_binary(
@@ -9,8 +11,8 @@ cc_binary(
 )
 
 genrule(
-  name = "TEST_$(TNAME)",
-  outs = ["$(TNAME).csv"],
-  cmd = "./$(TNAME) -q -o csv > $(CSVS)/$(TNAME).csv"
+  name = "TEST_{}".format(TNAME),
+  outs = ["{}.csv".format(TNAME)],
+  cmd = "$(execpath {}) -q -o csv > $(rootpath)$(BINDIR)/{}/{}.csv".format(TNAME, CSVS, TNAME)
 )
 
